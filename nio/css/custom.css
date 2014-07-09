@@ -1,0 +1,172 @@
+.iconshistory
+{
+    -moz-box-shadow:inset 0px 1px 0px 0px #fcb334;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #fcb334;
+    box-shadow:inset 0px 1px 0px 0px #fcb334;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #fcb334), color-stop(1,#fcb334));
+    background:-moz-linear-gradient(top, #fcb334 5%, #fcb334 100%);
+    background:-webkit-linear-gradient(top, #fcb334 5%, #fcb334 100%);
+    background:-o-linear-gradient(top, #fcb334 5%, #fcb334 100%);
+    background:-ms-linear-gradient(top, #fcb334 5%, #fcb334 100%);
+    background:linear-gradient(to bottom, #fcb334 5%, #fcb334 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcb334', endColorstr='#fcb334',GradientType=0);
+    background-color:#fcb334;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #fcb334;
+    display:inline-block;
+    cursor:pointer;
+    color:#fcb334;
+    font-family:arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:2px 2px;
+    padding-left: 2px;
+    margin-left: 2px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #fcb334;
+
+}
+
+.icon_image
+{
+    width: 20px;
+    height:20px;
+}
+
+.iconshistory:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #fcb334), color-stop(1, #fcb334));
+    background:-moz-linear-gradient(top, #fcb334 5%, #fcb334 100%);
+    background:-webkit-linear-gradient(top,#fcb334 5%, #fcb334 100%);
+    background:-o-linear-gradient(top, #fcb334 5%, #fcb334 100%);
+    background:-ms-linear-gradient(top,#fcb334 5%, #fcb334 100%);
+    background:linear-gradient(to bottom, #fcb334 5%, #fcb334 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcb334', endColorstr='#fcb334',GradientType=0);
+    background-color:#fcb334;
+}
+
+.graph-container{
+    top: 170px;
+    left:20px;
+    margin-top: 30px;
+    margin-left: 20px;
+    background-color: #F9D597;
+    width:95%;
+    height:70%; 
+    padding-left: 1%;
+    padding-right: 1%;
+
+}
+
+
+
+
+
+
+
+.dropdowncontainer.style {
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #555;
+    left: 101.8px;
+    max-height: 200px;
+    overflow: auto;
+    position: absolute;
+    top: 126px;
+    width: 60px;
+    z-index: 999;
+}
+.dropdowncontainer {
+    display: inline;
+    overflow-x: hidden !important;
+    padding: 0;
+}
+
+
+#datepickbox
+{
+    left:1000px;
+    position: relative;
+    top: 16px;
+    width:100px;
+    height:20px;
+}
+
+
+.picker
+{
+    height:18px;
+    width:18px;
+    margin-left:-26px;
+    vertical-align:middle;
+    margin-bottom: 3px;
+    cursor:pointer;
+    border:none;
+
+
+}
+
+.summarytable
+{
+
+
+    left: 200px;
+    top:30px;
+    width: 90%;
+    height: 500px;
+}
+
+.summaryeach 
+{
+    padding: 10px;
+    display: inline;
+    background-color: orange;
+    width:500px;
+    height:100px;
+    top: 20px;
+    position: relative;
+    left: 40px;
+    cursor: pointer;
+}
+
+
+
+#nioform
+{
+    left:1000px;
+    position:absolute;
+    height: 100%;
+    background-color: #e68a2e;
+    border:4px black;
+    overflow-y: scroll;
+    padding-left: 15px;
+    width: 25%;
+    border-left:1px solid #fcb334;
+    padding-top:30px;
+
+}
+
+
+.nioabc
+{
+    margin-left: 10px;
+    left: 10px;
+
+    width:300px;
+    height:35px;
+    z-index: 100;
+
+}
+
+#save{
+    cursor: pointer;
+}
+
+
+
+.datepicker
+{
+    left:1000px;
+    position: absolute;
+    
+}

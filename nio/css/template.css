@@ -1,0 +1,117 @@
+body{
+    margin:0;
+    padding:0;
+    font-size:13px;
+    font-family:Segoe UI, serif;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.template-height{
+    height: 100%;
+}
+.template-quicknav{
+    position:relative;
+    margin:0 auto 0;
+    display:block;
+    height:30px;
+    padding-top:10px;
+    line-height:normal;
+    z-index:100;
+
+}
+
+.template-quicknav .last{
+    border :none;
+    cursor: pointer;
+    color: black;
+}
+
+.template-quicknav ul{
+    margin:0;
+    padding:0;
+    list-style:none;
+    text-wrap: avoid;
+    display: inline;
+
+}
+
+.template-quicknav ul a {
+    float:left;
+    padding-right:37px;
+    padding-left: 37px;
+    text-transform:uppercase;
+    font-weight:bold;
+    border-right: 1px black solid;
+    text-decoration: none;
+}
+
+.template-navList{
+    color: black;
+    cursor: pointer;
+    
+}
+
+.template-line{
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    bottom: 0px;
+    height: 4px;
+    background-color: #FF9147;
+}
+
+.clear:after{content:"."; display:block; height:0; clear:both; visibility:hidden; line-height:0;}
+.clear{display:inline-block;}
+html[xmlns] .clear{display:block;}
+* html .clear{height:1%;}
+
+
+.template-wrapper{
+    display:block;
+    width:100%;
+    text-align:left;
+}
+
+
+.template-top{
+    color:black;
+}
+#template-navigation{
+    position: absolute;
+    top : 20px;
+    left : 280px;
+}
+.template-contents{
+    background-color:transparent;
+    padding-bottom: 30px;
+}
+
+#template-header{
+    padding:5px 0 10px 0;
+    position:relative;
+    margin:0 auto 0;
+    display:block;
+    cursor: pointer;
+    height: 12%;
+}
+
+#template-header h1, #template-header p{
+    margin:0;
+    padding-left: 130px;
+    list-style:none;
+    line-height:normal;
+}
+
+#template-header h1{
+    font-size:3.2em; 
+    font-variant:small-caps;
+    font-family:Segoe UI; /* "prociono" */
+}
+#template-header p{
+    font-size:1.2em;
+    font-family: Segoe UI ;  /* "american_captain"*/
+}

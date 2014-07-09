@@ -1,0 +1,29 @@
+.history_table{  
+    margin-top: 25px;
+    width:85%;
+    border-collapse:collapse;  
+    font-weight:bold;
+    color:#6b6b6b;
+    border: lightslategrey 2px solid;
+    border-top: none;
+    max-height: 300px;
+    overflow-y:scroll;
+    table-layout: fixed;
+    overflow-y: auto;
+    text-align: center;
+    left: 40px;
+    margin-left: 100px;
+    
+}
+
+.headingTr{
+    height:20px;
+    color: #f6f3f7; 
+    font-size:8pt;
+    border:0px solid;
+    width: 100%;
+}  
+
+.table-row-selectable{
+    cursor: pointer;
+}

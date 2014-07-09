@@ -1,0 +1,133 @@
+.nio-cal-contents{
+    width: 100%;
+    height: 79.2%;
+    background-color: transparent;
+    position: relative;
+}
+
+#nio-calendar{
+    position: relative;
+    left: 0px;
+    top: 0px;
+    width: 73%;
+    height: 100%;
+    background-color: transparent;
+}
+
+.nio-selected-contents{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    background-color: white;
+    width: 27%;
+}
+
+.nio-cal-control{
+    position: relative;
+    padding-top: 1%;
+    padding-bottom: 1%; 
+    width: 100%;
+    margin-top: 2%;
+    background-color: #E68A2E;
+}
+
+.nio-cal-info{
+    position: relative;
+    top: 0px;
+    height: 11%;
+    width: 100%;
+    background-color: #E68A2E;
+}
+
+.nio-apply-form{
+    position: relative;
+    width: 100%;
+    height: 97%;
+    background-color: #F9D597;
+    overflow-y:scroll;
+}
+
+.nio-apply-dates{
+    width: 100%;
+    position: relative;
+    border-collapse: collapse;
+}
+
+.nio-row-date{
+    width: 100%;
+    background-color: #F9C775;
+    border-bottom: 1px #F9D597 solid;
+}
+.nio-row-date td{
+    text-align: left;
+    padding: 1px;
+}
+
+.nio-row-date td img{
+    position: relative;
+    width: 15px;
+    height: 15px;
+}
+
+#nio-apply-reason{
+    width: 90%;
+    padding: 1%;
+    margin-top: 2%;
+    margin-left: 5%;
+    text-align: center;
+}
+
+.nio-cal-button{
+    width: 30%;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+    text-transform: uppercase;
+    position: absolute;
+    cursor: pointer;
+    position: relative;
+    
+    background-color: #eee;
+    border-bottom: 3px solid #ccc;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    
+}
+
+.nio-cal-alert{
+    display: none;
+}
+
+.nio-cal-button :hover{
+    border: 1px white solid;
+}
+
+#nio-cal-applyButton{
+    width: 80%; 
+}
+
+#nio-cal-checkbox{
+    left:0px;
+}
+#nio-cal-removeButton{
+  width: 80%; 
+}
+
+#nio-cal-cancelButton{
+    width: 80%; 
+}
+
+.nio-date-remove{
+    cursor: pointer;
+}
+
+.description-nio{
+    width: 100%;
+}
+
+    
+.ui-widget-header{
+    border: none;
+}

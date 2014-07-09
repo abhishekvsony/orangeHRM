@@ -1,0 +1,81 @@
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset .button-green{ 
+    font-size:12px;
+    font-family:arial, helvetica, sans-serif;
+    padding: 7px 10px 7px 10px; 
+    text-decoration:none;
+    display: inline;
+    text-shadow: 0px 1px 0 rgba(255,255,255,0.4);
+    font-weight:bold; 
+    color: #FFFFFF;
+    background-color: #4ba614; 
+    z-index: 99;
+    background-image: none;
+    cursor: pointer;
+}
+
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset  .button-red{
+    cursor: pointer;
+    font-size:12px;
+    font-family:arial, helvetica, sans-serif; 
+    padding: 7px 10px 7px 10px; 
+    text-decoration:none; 
+    text-shadow: 0px 1px 0 rgba(255,255,255,0.4);
+    font-weight:bold;
+    color: #FFFFFF;
+    display: inline;
+    background-color: #f62b2b;
+    margin: 7px 10px 7px 10px; 
+    z-index: 99;
+    background-image: none;
+}
+
+.orange-button{
+    background: #E77817;    /*  #4669ab    */
+    color: #614102 ;    /*   rgba(21,31,53,1)   */
+    text-shadow: 0 1px 1px rgba(255,255,255,.35);
+    cursor: pointer;
+    text-align: center;
+}
+
+.red-button{
+    background: #eb5a5f;
+    color: rgba(69,22,24,1);
+    cursor: pointer;
+    text-align: center;
+}
+
+.green-button{ 
+    text-align: center;
+    background: #58853e;
+    color: rgba(22,33,16,1); 
+    cursor: pointer;
+}
+
+.general-button{
+    -webkit-box-shadow:0 4px 5px rgba(0,0,0,.3);
+    -moz-box-shadow:0 4px 5px rgba(0,0,0,.3);
+    display: inline-block !important;
+    font: 700 13px/36px Segio UI;
+    height: 26px;
+    margin: 0 0 10px;
+    padding: 0 10px 11px;
+    position: relative;
+    text-decoration: none;
+    text-shadow: 0 1px 1px rgba(255,255,255,.35);
+    width: 125px;
+}
+
+
+.cb-enable, .cb-disable, .cb-enable span, .cb-disable span { background: url(../images/switch.gif) repeat-x; display: block; float: left; }
+.cb-enable span, .cb-disable span { line-height: 30px; display: block; background-repeat: no-repeat; font-weight: bold; }
+.cb-enable span { background-position: left -90px; padding: 0 10px; }
+.cb-disable span { background-position: right -180px;padding: 0 10px; }
+.cb-disable.selected { background-position: 0 -30px; }
+.cb-disable.selected span { background-position: right -210px; color: #fff; }
+.cb-enable.selected { background-position: 0 -60px; }
+.cb-enable.selected span { background-position: left -150px; color: #fff; }
+.switch label { cursor: pointer; }
+.switch input { display: none; }
+
+
+/*              #F7BA59    */

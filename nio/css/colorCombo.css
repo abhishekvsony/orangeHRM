@@ -1,0 +1,50 @@
+.template-textWhite{
+    color:black;
+}
+
+/*                  Template one            */
+
+
+.template-top{
+    background-color: #E77817;
+}
+
+.template-titleColor{
+        color: black;
+}
+
+.template-titleSloganColor{
+        color: black;
+}
+
+.template-bg{
+    background-color:#F0EAD6;    /* #F0EAD6 */      
+}
+
+.template-lightBack{
+    background-color:#E77817  ;    /*    #E77817     #FAD163          */        
+}
+
+.template-darkBack{
+    background-color: #E68A2E ;        /*#E68A2E          #FCB334*/  
+}
+
+.template-tile{
+    background-color: #F9D597 ;
+}
+
+.template-tile-back{
+   background-color:  #E68A2E;
+}
+
+.template-darkColor{
+    color:  #E68A2E;                     
+}
+
+.template-lightColor{
+    color:#FCB334 ;                      
+}
+
+.template-lightBorder{
+    border-bottom-color:#E77817 ;
+}
