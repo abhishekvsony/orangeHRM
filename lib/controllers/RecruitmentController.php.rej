@@ -1,0 +1,19 @@
+***************
+*** 768,773 ****
+              try {
+                  $application->save();
+                  $this->_saveApplicationEvent($event, JobApplicationEvent::EVENT_MARK_OFFER_DECLINED);
+                  $message = 'UPDATE_SUCCESS';
+              } catch (Exception $e) {
+                  $message = 'UPDATE_FAILURE';
+--- 768,777 ----
+              try {
+                  $application->save();
+                  $this->_saveApplicationEvent($event, JobApplicationEvent::EVENT_MARK_OFFER_DECLINED);
++ 
++                 $notifier = new RecruitmentMailNotifier();
++                 $notifier->sendApplicationRejectedEmailToApplicant($application);
++ 
+                  $message = 'UPDATE_SUCCESS';
+              } catch (Exception $e) {
+                  $message = 'UPDATE_FAILURE';

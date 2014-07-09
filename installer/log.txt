@@ -1,0 +1,47 @@
+Client Info
+
+User Agent : Mozilla/5.0 (Windows NT 6.1; rv:30.0) Gecko/20100101 Firefox/30.0
+Remote Address : 127.0.0.1
+
+Server Info
+
+Host : localhost
+PHP Version : 5.5.11
+Server : Apache/2.4.9 (Win32) OpenSSL/1.0.1g PHP/5.5.11
+Admin : postmaster@localhost
+
+Document Root : C:/xampp/htdocs
+ROOT_PATH : C:\xampp\htdocs\OrangeHRM
+
+OrangeHRM Installation Log
+
+Mon, 07 Jul 2014 11:10:30 +0200 DB Creation - Starting
+Mon, 07 Jul 2014 11:10:30 +0200 DB Creation - Done
+Mon, 07 Jul 2014 11:10:30 +0200 DB Creation - No Errors
+Mon, 07 Jul 2014 11:10:33 +0200 Fill Data Phase 1 - Starting
+Mon, 07 Jul 2014 11:10:33 +0200 Fill Data Phase 1 - Connected to the DB Server
+Mon, 07 Jul 2014 11:10:33 +0200 Fill Data Phase 1 - Selected the DB
+Mon, 07 Jul 2014 11:10:33 +0200 Fill Data Phase 1 - Reading DB Script
+Mon, 07 Jul 2014 11:10:33 +0200 Fill Data Phase 1 - Opened DB Script
+Mon, 07 Jul 2014 11:10:33 +0200 Fill Data Phase 1 - Read DB script
+Mon, 07 Jul 2014 11:10:33 +0200 Fill Data Phase 1 - There are 171 Statements in the DB script
+Mon, 07 Jul 2014 11:13:09 +0200 Fill Data Phase 1 - Done
+Mon, 07 Jul 2014 11:13:09 +0200 Fill Data Phase 1 - No Errors
+Mon, 07 Jul 2014 11:13:12 +0200 Fill Data Phase 2 - Starting
+Mon, 07 Jul 2014 11:13:12 +0200 Fill Data Phase 2 - Connected to the DB Server
+Mon, 07 Jul 2014 11:13:12 +0200 Fill Data Phase 2 - Selected the DB
+Mon, 07 Jul 2014 11:13:12 +0200 Fill Data Phase 2 - Reading DB Script
+Mon, 07 Jul 2014 11:13:12 +0200 Fill Data Phase 2 - Opened DB Script
+Mon, 07 Jul 2014 11:13:12 +0200 Fill Data Phase 2 - Read DB script
+Mon, 07 Jul 2014 11:13:12 +0200 Fill Data Phase 2 - There are 552 Statements in the DB script
+Mon, 07 Jul 2014 11:13:28 +0200 Fill Data Phase 2 - Done
+Mon, 07 Jul 2014 11:13:32 +0200 Fill Data Phase 2 - No Errors
+Mon, 07 Jul 2014 11:13:35 +0200 Create DB user - Starting
+Mon, 07 Jul 2014 11:13:35 +0200 Create DB user - Done
+Mon, 07 Jul 2014 11:13:35 +0200 Create DB user - No Errors
+Mon, 07 Jul 2014 11:13:38 +0200 Create OrangeHRM user - Starting
+Mon, 07 Jul 2014 11:13:38 +0200 Create OrangeHRM user - Done
+Mon, 07 Jul 2014 11:13:38 +0200 Create OrangeHRM user - No Errors
+Mon, 07 Jul 2014 11:13:40 +0200 Write Conf - Starting
+Mon, 07 Jul 2014 11:13:40 +0200 Write Conf - Done
+Mon, 07 Jul 2014 11:13:40 +0200 Write Conf - No Errors

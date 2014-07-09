@@ -1,0 +1,32 @@
+Thu, 18 Apr 2013 13:06:57 +0200 : 
+Undefined index: recordsCount in C:\xampp\htdocs\Orangehrm-2.5\orangehrm-2.5-beta.17\templates\leave\leaveRequestList.php on line 28
+Thu, 18 Apr 2013 13:10:33 +0200 : 
+Undefined index: recordsCount in C:\xampp\htdocs\Orangehrm-2.5\orangehrm-2.5-beta.17\templates\leave\leaveRequestList.php on line 28
+Thu, 18 Apr 2013 13:11:51 +0200 : 
+Undefined index: recordsCount in C:\xampp\htdocs\Orangehrm-2.5\orangehrm-2.5-beta.17\templates\leave\leaveRequestList.php on line 28
+47200 April 18, 2013, 3:23 pm NO database found
+Thu, 18 Apr 2013 15:23:54 +0200 : Error :\nNO database found\nTech Info\n------------\nUnknown database \'hr_mysql\'64888 June 10, 2013, 10:54 am MySQL Query Error
+Mon, 10 Jun 2013 10:54:55 +0200 : Error :\nMySQL Query Error : INSERT INTO `hs_hr_employee_leave_quota` (`year` , `leave_type_id` , `employee_id` , `no_of_days_allotted`) SELECT 2014 , `leave_type_id` , `employee_id` , `no_of_days_allotted` FROM `hs_hr_employee_leave_quota` WHERE 0leave_type_id` = \'LTY003\'\nTech Info\n------------\nYou have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'` = \'LTY003\'\' at line 1Wed, 03 Jul 2013 07:47:27 +0200 : 
+Undefined index: recordsCount in C:\xampp\htdocs\Orangehrm-2.5\orangehrm-2.5-beta.17\templates\leave\leaveRequestList.php on line 28
+Wed, 03 Jul 2013 07:48:18 +0200 : 
+Undefined index: recordsCount in C:\xampp\htdocs\Orangehrm-2.5\orangehrm-2.5-beta.17\templates\leave\leaveRequestList.php on line 28
+Wed, 03 Jul 2013 08:17:00 +0200 : 
+Undefined index: recordsCount in C:\xampp\htdocs\Orangehrm-2.5\orangehrm-2.5-beta.17\templates\leave\leaveRequestList.php on line 28
+Wed, 03 Jul 2013 08:17:05 +0200 : 
+Undefined index: recordsCount in C:\xampp\htdocs\Orangehrm-2.5\orangehrm-2.5-beta.17\templates\leave\leaveRequestList.php on line 28
+Wed, 03 Jul 2013 08:20:39 +0200 : 
+Undefined index: recordsCount in C:\xampp\htdocs\Orangehrm-2.5\orangehrm-2.5-beta.17\templates\leave\leaveRequestList.php on line 28
+Wed, 03 Jul 2013 08:30:37 +0200 : 
+Undefined index: recordsCount in C:\xampp\htdocs\Orangehrm-2.5\orangehrm-2.5-beta.17\templates\leave\leaveRequestList.php on line 28
+Wed, 03 Jul 2013 08:33:28 +0200 : 
+Undefined index: recordsCount in C:\xampp\htdocs\Orangehrm-2.5\orangehrm-2.5-beta.17\templates\leave\leaveRequestList.php on line 28
+27751 July 8, 2014, 6:40 am NO database Connection found
+Tue, 08 Jul 2014 06:40:41 +0200 : Error :\nNO database Connection found\nTech Info\n------------\nNo connection could be made because the target machine actively refused it.
+46535 July 8, 2014, 6:41 am NO database Connection found
+Tue, 08 Jul 2014 06:41:09 +0200 : Error :\nNO database Connection found\nTech Info\n------------\nNo connection could be made because the target machine actively refused it.
+57788 July 8, 2014, 6:41 am NO database Connection found
+Tue, 08 Jul 2014 06:41:15 +0200 : Error :\nNO database Connection found\nTech Info\n------------\nNo connection could be made because the target machine actively refused it.
+Wed, 09 Jul 2014 11:32:50 +0200 : 
+Undefined index: recordsCount in C:\xampp\htdocs\OrangeHRM\templates\leave\leaveRequestList.php on line 28
+Wed, 09 Jul 2014 11:38:05 +0200 : 
+Undefined index: recordsCount in C:\xampp\htdocs\OrangeHRM\templates\leave\leaveRequestList.php on line 28
