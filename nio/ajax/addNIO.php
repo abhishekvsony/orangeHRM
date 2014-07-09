@@ -1,10 +1,11 @@
 <?php
 
 ///This is to ADD entry or entries to the NIO database.
-
+session_start();
 include 'dbConnection.php';
 
-$empID = 1;
+$empID = $_SESSION['empID'];
+$empID = intval($empID);
 $empName = 'Roshan';
 $data = $_POST['data'];
 $description = "Forgot ID card";
@@ -38,10 +39,10 @@ while ($i < $dataLength) {
     $endTime = $data[$i]['endTime'];
     $status = $data[$i]['status'];
 
-    $duration = $duration+(strtotime($endTime) - strtotime($startTime)) / 60;
-    if($status){
-    $query = "INSERT INTO hs_hr_nio_details (nio_id,nio_date,nio_start_time,nio_end_time) VALUES ('$nioID','$nioDate','$startTime','$endTime')";
-    $result = mysqli_query($nio_conn, $query);
+    $duration = $duration + (strtotime($endTime) - strtotime($startTime)) / 60;
+    if ($status) {
+        $query = "INSERT INTO hs_hr_nio_details (nio_id,nio_date,nio_start_time,nio_end_time) VALUES ('$nioID','$nioDate','$startTime','$endTime')";
+        $result = mysqli_query($nio_conn, $query);
     }
 
     $i++;

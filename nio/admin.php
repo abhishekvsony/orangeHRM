@@ -14,7 +14,7 @@
     </head>
     <body class="template-bg">
         <?php
-        require_once("header.php");
+        require_once 'header.php';
         ?>
         <div class="template-wrapper template-contents">
             <div class="admin-container2" id="admin-settings">
@@ -122,7 +122,7 @@
                         <select title="Select Employee Designation">
                             <option>ALL</option>
                         </select>
-                        <span class="orange-button" id="privilege-table-searchButton">Search</span>
+                        <span class="orange-button" id="privilege-table-searchButton">Add</span>
                     </div>
                     <div class="admin-data-container" id="privilege-tables">
                         <table class="adminTable-menu">
@@ -138,9 +138,9 @@
                                 <tr class="headingTr template-lightBack">
                                     <td>EMPLOYEE ID</td>
                                     <td>EMPLOYEE NAME</td>
-                                    <td>APPLICATION DATE </td>
-                                    <td>NIO_ID</td>
-                                    <td>DATE</td>
+                                    <td>DESIGNATION</td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </table>
 
@@ -149,9 +149,9 @@
                                     <tr class="table-row-selectable">
                                         <td>#2331212</td>  
                                         <td>Rajesh</td>
-                                        <td>Feb 21,2013</td>
-                                        <td>134573</td>
-                                        <td>Feb 21,2013</td>
+                                        <td>Developer</td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 </table>
                             </div>
@@ -161,10 +161,10 @@
                                 <tr class="headingTr template-lightBack">
                                     <td>EMPLOYEE ID</td>
                                     <td>EMPLOYEE NAME</td>
-                                    <td>DATE </td>
-                                    <td>NIO ID</td>
-                                    <td>DATE</td>
-                                    <td>DURATION</td>
+                                    <td>DESIGNATION</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </table>
                             <div class="admin-table-container">
@@ -172,10 +172,10 @@
                                     <tr class="table-row-selectable">
                                         <td>#2331212</td>
                                         <td>Prasad</td>
-                                        <td>Feb 21,2013</td>
-                                        <td>34634</td>
-                                        <td>Feb 21,2013</td>
-                                        <td>2 Days</td>
+                                        <td>Tester</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 </table>
                             </div>
@@ -185,10 +185,10 @@
                                 <tr class="headingTr template-lightBack">
                                     <td>EMPLOYEE ID</td>
                                     <td>EMPLOYEE NAME</td>
-                                    <td>DATE </td>
-                                    <td>NIO ID</td>
-                                    <td>DATE</td>
-                                    <td>DURATION</td>
+                                    <td>DESIGNATION</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </table>
                             <div class="admin-table-container">
@@ -197,9 +197,9 @@
                                         <td>#2331212</td>
                                         <td>Pramod</td>
                                         <td>Feb 21,2013</td>
-                                        <td>34634</td>
-                                        <td>Feb 21,2013</td>
-                                        <td>2 Days</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 </table>
                             </div>

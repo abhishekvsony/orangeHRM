@@ -9,24 +9,7 @@
         <link rel="stylesheet" type="text/css"  href="css/admin.css"/> 
     </head>
     <body class="template-bg" >
-
         <?php
-        ob_start();
-
-        session_start();
-        if (!isset($_SESSION['fname'])) {
-            header("Location: ../login.php");
-            exit();
-        }
-        if (isset($_GET['ACT']) && $_GET['ACT'] == 'logout') {
-            session_destroy();
-            setcookie('Loggedin', '', time() - 3600, '/');
-            header("Location: ../login.php");
-            exit();
-        }
-        $empID = $_SESSION['empID'];
-        $empID=intval($empID);
-        echo $empID;
         require_once 'header.php';
         ?>
         <div <div class="admin-container2">
@@ -42,7 +25,6 @@
                     </table>
                     <div class="admin-table-container">
                         <table class="flatTable table-row-nioHistoryTable">
-
                         </table>
                     </div>
                 </div>
@@ -54,7 +36,5 @@
             <script src="js/moment.min.js"></script>
             <script src="js/fullcalendar.min.js"></script>
             <script src="js/employee.js"></script>
-
-
     </body>
 </html>
