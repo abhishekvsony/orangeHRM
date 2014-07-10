@@ -1,12 +1,16 @@
 <?php
-
 ///This is to ADD entry or entries to the NIO database.
 session_start();
 include 'dbConnection.php';
 
 $empID = $_SESSION['empID'];
-$empID = intval($empID);
-$empName = 'Roshan';
+$query = "SELECT * FROM hs_hr_employee WHERE employee_id='$empID'";
+$result = mysqli_query($hrm_conn, $query);
+$row = mysqli_fetch_array($result);
+$loginName = $row['emp_firstname'] . " " . $row['emp_lastname'];
+$empName = $loginName;
+$empID=$row['emp_number'];
+
 $data = $_POST['data'];
 $description = "Forgot ID card";
 $nioType = 1;

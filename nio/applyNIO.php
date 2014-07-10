@@ -44,12 +44,13 @@
             </div>
         </div>
         <div id="popup-nio-apply"></div>
-        <div id="popup-nio-description" style="display: none"><textarea></textarea></div>
+        <div id="popup-nio-description" style="display: none"><textarea class="descriptionText" id="descriptionText" disabled="false"></textarea></div>
         <script src="js/jquery-1.10.2.js"></script>
         <script src="js/jquery-ui-1.10.4.js"></script>
         <script src="js/jquery.mCustomScrollbar.js"></script>
         <script src="js/moment.min.js"></script>
         <script src="js/fullcalendar.min.js"></script>
-        <script src="js/employee.js"></script>
+        <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+        <script src="js/employee.js"></script>        
     </body>
 </html>

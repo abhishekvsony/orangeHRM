@@ -2,7 +2,12 @@
 session_start();
 include 'dbConnection.php';
 $empID = $_SESSION['empID'];
-$empID = intval($empID);
+$query="SELECT * FROM hs_hr_employee WHERE employee_id='$empID'";
+$result=  mysqli_query($hrm_conn, $query);
+$row=  mysqli_fetch_array($result);
+$loginName=$row['emp_firstname']." ".$row['emp_lastname'];
+$empID=$row['emp_number'];
+
 $array = array();
 $query = "SELECT * FROM hs_hr_nio WHERE emp_id=$empID";
 $result = mysqli_query($nio_conn, $query);

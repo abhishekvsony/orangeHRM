@@ -591,3 +591,10 @@ td h3{
 h1{
     color: black;
 }
+
+.cross-admin{
+    width: 20px;
+    height: 20px;
+    cursor:pointer;
+    z-index: 100;
+}

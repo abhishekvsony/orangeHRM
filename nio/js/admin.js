@@ -14,6 +14,66 @@ $(document).ready(function() {
     var noNIO=[];       //List of emp with no access to NIO
     //--------------------To DO ON LOAD---------------------
     
+    function validateAdminPrivilege(empID){
+        var flag=1;
+        switch(tableSelected){
+            case 1:
+                $.each(admin,function(j){       //Check if the employee is already in the list
+                    if(admin[j]==empID)
+                        flag=0;
+                });
+                if(flag){
+                    $.each(noNIO,function(j){   //If In noNIO status then you cant add that employee to admin
+                        if(noNIO[j]==empID)
+                            flag=0;
+                    });
+                }
+                break;
+            case 2:
+                $.each(superAdmin,function(j){   //Check if the employee is already in the list
+                    if(superAdmin[j]==empID)
+                        flag=0;
+                });
+                if(flag){
+                    $.each(noNIO,function(j){    //If In noNIO status then you cant add that employee to super admin
+                        if(noNIO[j]==empID)
+                            flag=0;
+                    });
+                }
+                break;
+            case 3:
+                $.each(noNIO,function(j){        //Check if the employee is already in the list
+                    if(noNIO[j]==empID)
+                        flag=0;
+                });
+                $.each(superAdmin,function(j){   //If In superAdmin status then you cant add that employee to noNIO
+                    if(superAdmin[j]==empID)
+                        flag=0;
+                });  
+                $.each(admin,function(j){        //If In admin status then you cant add that employee to noNIO
+                    if(admin[j]==empID)
+                        flag=0;
+                });
+                break;
+        }
+        if(flag)
+            return true;
+        else
+            return false;
+    }
+    
+    function changeEmployeeStatus(empID,status){
+        $.ajax({
+            type: 'post',
+            url: 'ajax/assignPrivilege.php',
+            data:{
+                empID: empID,
+                status:status,
+                table: tableSelected
+            }
+        });
+    }
+    
     function callBackGetList(data){
         
         empList=data['empName'];
@@ -99,7 +159,67 @@ $(document).ready(function() {
                 $("#nio-department-to-add").val("");
                 return false;
             }                  
-        });     
+        }); 
+        
+        $("#privilege-table-addBox").autocomplete({
+            source: empList,
+            select: function(event,ui){  
+                var employeeID=ui.item.value;
+                var employeeName=ui.item.label;
+                var jobTitleCode=ui.item.jobTitleCode;
+                var jobTitleName;
+                $.each(designationList,function(j){
+                    if(designationList[j].value==jobTitleCode){
+                        jobTitleName=designationList[j].label;
+                        return false;
+                    } 
+                });
+                $("#privilege-table-addBox").val(employeeName);
+                
+                switch(tableSelected){
+                    case 1:
+                        if(validateAdminPrivilege(employeeID)){
+                            $("#table-admin .table-row-adminTable").append(
+                                "<tr class='table-row-selectable' empID="+employeeID+">"+
+                                "<td>"+employeeID+"</td>"+
+                                "<td>"+employeeName+"</td>"+
+                                "<td>"+jobTitleName+"</td>"+
+                                "<td><img class='cross-admin' src=\"images/close_graph_black.png\"></td>"+                                        
+                                "</tr>");
+                            admin.push(employeeID);
+                            changeEmployeeStatus(employeeID,true);
+                        }
+                        break;
+                    case 2:
+                        if(validateAdminPrivilege(employeeID)){
+                            $("#table-super-admin .table-row-superAdminTable").append(
+                                "<tr class='table-row-selectable' empID="+employeeID+">"+
+                                "<td>"+employeeID+"</td>"+
+                                "<td>"+employeeName+"</td>"+
+                                "<td>"+jobTitleName+"</td>"+
+                                "<td><img class='cross-admin' src=\"images/close_graph_black.png\"></td>"+                                        
+                                "</tr>");
+                            superAdmin.push(employeeID);
+                            changeEmployeeStatus(employeeID,true);
+                        }
+                        break;
+                    case 3:
+                        if(validateAdminPrivilege(employeeID)){
+                            $("#table-non-nio .table-row-nonNIOTable").append(
+                                "<tr class='table-row-selectable' empID="+employeeID+">"+
+                                "<td>"+employeeID+"</td>"+
+                                "<td>"+employeeName+"</td>"+
+                                "<td>"+jobTitleName+"</td>"+
+                                "<td><img class='cross-admin' src=\"images/close_graph_black.png\"></td>"+                                        
+                                "</tr>");
+                            noNIO.push(employeeID);
+                            changeEmployeeStatus(employeeID,false);     //Dont allow
+                        }
+                        break;
+                }
+                return false;
+            }                  
+        }); 
         
         $("#nio-department-to-add").val("");
         $("#nio-employee-to-add").val("");
@@ -118,6 +238,25 @@ $(document).ready(function() {
     
     getList(callBackGetList);
     
+    function callBackEmpStatus(data){
+        console.log(data);
+        noNIO=data['noAccess'];
+        admin=data['admin'];
+        superAdmin=data['superAdmin'];
+    }
+    
+    function getEmpStatus(callBackEmpStatus){
+        $.ajax({
+            dataType: 'json',
+            url: 'ajax/empStatus.php',
+            type: 'post',
+            success:callBackEmpStatus
+        });
+    }
+    
+    getEmpStatus(callBackEmpStatus);
+    
+  
     
     //---------------FRONT END READY-------------------->>>>
     $(".titleTd").click(function() {
@@ -164,21 +303,143 @@ $(document).ready(function() {
         $("#table-admin").show();
         $("#table-super-admin").hide();
         $("#table-non-nio").hide();
+        
+        var employeeID;
+        var employeeName;
+        var jobTitleCode;
+        var jobTitleName;
+        $.each(admin,function(j){
+            $.each(empList,function(i){
+                if(empList[i].value==admin[j]){
+                    employeeID=empList[i].value;
+                    employeeName=empList[i].label;
+                    jobTitleCode=empList[i].jobTitleCode;
+                    $.each(designationList,function(j){
+                        if(designationList[j].value==jobTitleCode){
+                            jobTitleName=designationList[j].label;
+                            return false;
+                        } 
+                    });
+                    $("#table-admin .table-row-adminTable").append(
+                        "<tr class='table-row-selectable' empID="+employeeID+">"+
+                        "<td>"+employeeID+"</td>"+
+                        "<td>"+employeeName+"</td>"+
+                        "<td>"+jobTitleName+"</td>"+
+                        "<td><img class='cross-admin' src=\"images/close_graph_black.png\"></td>"+                                        
+                        "</tr>");
+                    return false;
+                } 
+            });
+            
+        });
+        
     });
     
     $("#privilege-admin-tab").click(function(){
         $(".admin-table-div").hide();
         $("#table-admin").show();
+        tableSelected=1;
+        $("#table-admin .table-row-adminTable").empty();
+        var employeeID;
+        var employeeName;
+        var jobTitleCode;
+        var jobTitleName;
+        $.each(admin,function(j){
+            $.each(empList,function(i){
+                if(empList[i].value==admin[j]){
+                    employeeID=empList[i].value;
+                    employeeName=empList[i].label;
+                    jobTitleCode=empList[i].jobTitleCode;
+                    $.each(designationList,function(j){
+                        if(designationList[j].value==jobTitleCode){
+                            jobTitleName=designationList[j].label;
+                            return false;
+                        } 
+                    });
+                    $("#table-admin .table-row-adminTable").append(
+                        "<tr class='table-row-selectable' empID="+employeeID+">"+
+                        "<td>"+employeeID+"</td>"+
+                        "<td>"+employeeName+"</td>"+
+                        "<td>"+jobTitleName+"</td>"+
+                        "<td><img class='cross-admin' src=\"images/close_graph_black.png\"></td>"+                                        
+                        "</tr>");
+                    return false;
+                } 
+            });
+            
+        });
+        
     });
     
     $("#privilege-super-admin-tab").click(function(){
         $(".admin-table-div").hide();
         $("#table-super-admin").show();
+        tableSelected=2;
+        
+        var employeeID;
+        var employeeName;
+        var jobTitleCode;
+        var jobTitleName;
+        $.each(superAdmin,function(j){
+            $.each(empList,function(i){
+                if(empList[i].value==superAdmin[j]){
+                    employeeID=empList[i].value;
+                    employeeName=empList[i].label;
+                    jobTitleCode=empList[i].jobTitleCode;
+                    $.each(designationList,function(j){
+                        if(designationList[j].value==jobTitleCode){
+                            jobTitleName=designationList[j].label;
+                            return false;
+                        } 
+                    });
+                    $("#table-super-admin .table-row-superAdminTable").empty();
+                    $("#table-super-admin .table-row-superAdminTable").append(
+                        "<tr class='table-row-selectable' empID="+employeeID+">"+
+                        "<td>"+employeeID+"</td>"+
+                        "<td>"+employeeName+"</td>"+
+                        "<td>"+jobTitleName+"</td>"+
+                        "<td><img class='cross-admin' src=\"images/close_graph_black.png\"></td>"+                                        
+                        "</tr>");
+                    return false;
+                } 
+            });
+            
+        });
+        
     });
     
     $("#privilege-non-nio-tab").click(function(){
         $(".admin-table-div").hide();
         $("#table-non-nio").show();
+        tableSelected=3;
+        var employeeID;
+        var employeeName;
+        var jobTitleCode;
+        var jobTitleName;
+        $.each(noNIO,function(j){
+            $.each(empList,function(i){
+                if(empList[i].value==noNIO[j]){
+                    employeeID=empList[i].value;
+                    employeeName=empList[i].label;
+                    jobTitleCode=empList[i].jobTitleCode;
+                    $.each(designationList,function(j){
+                        if(designationList[j].value==jobTitleCode){
+                            jobTitleName=designationList[j].label;
+                            return false;
+                        } 
+                    });
+                    $("#table-non-nio .table-row-nonNIOTable").empty();
+                    $("#table-non-nio .table-row-nonNIOTable").append(
+                        "<tr class='table-row-selectable' empID="+employeeID+">"+
+                        "<td>"+employeeID+"</td>"+
+                        "<td>"+employeeName+"</td>"+
+                        "<td>"+jobTitleName+"</td>"+
+                        "<td><img class='cross-admin' src=\"images/close_graph_black.png\"></td>"+                                        
+                        "</tr>"); 
+                    return false;
+                } 
+            });
+        });
     });
     
     //---------------ADMIN SETTINGS------------------------------------
@@ -479,4 +740,46 @@ $(document).ready(function() {
     $('#cancel-nio-type').click(function(){
         window.location='admin.php';
     });
+    
+    $('body').delegate('.cross-admin','click',function(){
+        alert('okay');
+        $(this).parents('tr').css({
+            'padding':'0px',
+            'margin':'0px'
+        });
+        var empID=$(this).parents('tr').attr('empID');
+        $(this).parents('tr').remove();
+        console.log(empID);
+        var status;
+        switch(tableSelected){
+            case 1:
+                status=false;
+                $.each(admin,function(j){
+                    if(empID==admin[j])
+                        admin.splice(j,1);
+                });
+                break;
+            case 2:
+                status=false;
+                $.each(superAdmin,function(j){
+                    if(empID==superAdmin[j])
+                        superAdmin.splice(j,1);
+                });
+                break;
+            case 3:
+                 $.each(noNIO,function(j){
+                    if(empID==noNIO[j])
+                        noNIO.splice(j,1);
+                });
+                status=true;
+                break;
+        }
+        changeEmployeeStatus(empID,status);
+    });
+
 });
+
+//------------------------Deleting Privilege Assignment----------------------
+
+
+ 

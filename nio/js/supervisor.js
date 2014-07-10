@@ -43,17 +43,8 @@ $(document).ready(function() {
         chartNumber=$(this).attr('chartNumber');
         if(chartNumber==1){
             //Leave Chart
-            textToPass="Total number of leaves";
-            seriesToPass=[{
-                name: 'Leaves left',
-                data: [12, 2, 3, 2, 1, 10, 12, 8]
-            }, {
-                name: 'Leaves Taken',
-                data: [-3, -4, 4, 2, 5, 20, 13, 6]
-            }
-            ];
-            dataToPass=['user1', 'user2', 'user3', 'user4', 'user5', 'user6', 'user7', 'user8'];
-            createGraphLeave(textToPass,seriesToPass,dataToPass);
+            leaveChartPageNumber=1;
+            leaveChart();
         }
         else{
             //NIO chart
@@ -81,7 +72,7 @@ $(document).ready(function() {
                     nioAccepted[i]=parseInt(data[1][i],10);
                     ++i;  
                 }
-                if(i==8)
+                if(i>1)
                     createGraphNIO(textToPass,nioAccepted,nioApplied,dataToPass);
                 else
                     decrementNIOChartPage();
@@ -117,7 +108,7 @@ $(document).ready(function() {
                 
                 console.log(data[0].length);
                 
-                if(data[0].length==8)
+                if(data[0].length>1)
                     createGraphLeave(textToPass,seriesToPass,dataToPass);
                 else
                     decrementLeaveChartPage();
@@ -259,8 +250,7 @@ $(document).ready(function() {
                 elem.html("<h1 style=\"font-size : 50; text-align: center;padding-top: 30px\">" + data[0]['nioCount'] + "</h1>");
             }
         }); 
-        
-        
+
         $.ajax({
             type: "POST",
             url: "ajax/flip.php",
@@ -275,8 +265,6 @@ $(document).ready(function() {
         }); 
       
         leaveChart();
-     
-        
         $("#table-noStatusTable .table-row-noStatusTable").empty();
         populateNoStatusTable(callBackNoStatusTable);
     }

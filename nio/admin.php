@@ -2,7 +2,6 @@
 <html>
     <head>
         <title>NIO-Administrator</title>
-
         <link rel="stylesheet" type="text/css"  href="css/jquery.mCustomScrollbar.css"/>
         <link rel="stylesheet" type="text/css" href="css/colorCombo.css"/>
         <link rel="stylesheet" type="text/css" href="css/magnific-popup.css"/>
@@ -70,8 +69,7 @@
                     </div>
                     <div id="admin-gen-set-buttons">
                         <span class="general-button green-button gen-set-button-pos">SAVE</span>
-                        <span class="general-button red-button gen-set-button-pos">REVERT</span>
-                        <span class="general-button orange-button gen-set-button-pos">DEFAULT</span>
+                        <span class="general-button orange-button gen-set-button-pos">CANCEL</span>
                     </div>
                 </div>
 
@@ -86,7 +84,7 @@
 
                                         </ul>
                                     </div>
-                                    <input type="text" id="nio-reason-to-add"/><br/>
+                                    <input type="text" id="nio-reason-to-add" placeholder='Name NIO Reason'/><br/>
                                 </td>
                                 <td>
                                     <h3>Department</h3>
@@ -95,7 +93,7 @@
 
                                         </ul>
                                     </div>
-                                    <input type="text" id="nio-department-to-add"/><br
+                                    <input type="text" id="nio-department-to-add" placeholder='Name Department'/><br
                                 </td>
                                 <td>
                                     <h3>Exception Employee</h3>
@@ -104,7 +102,7 @@
 
                                         </ul>
                                     </div>
-                                    <input type="text" id="nio-employee-to-add"/><br/>
+                                    <input type="text" id="nio-employee-to-add" placeholder='Name Employee'/><br/>
                                 </td>
                             </tr>
                             <tr><td></td>
@@ -112,17 +110,16 @@
                                     <span class='general-button orange-button' id="cancel-nio-type">CANCEL</span></td>
                                 <td></td></tr>
                         </table>
-
                     </div>
                 </div>
 
                 <div class="settings-contents" id="settings-privilege">
-                    <div class="searchBox" id="privilege-table-searchBox" title="Enter Employee Name">
-                        <input type="text" id="privilege-table-dropBox"/>
-                        <select title="Select Employee Designation">
+                    <div class="searchBox" title="Enter Employee Name" >
+                        <input type="text" id='privilege-table-addBox' placeholder="Employee Name"/>
+                        <select title="Select Employee Designation" id="privilege-table-dropBox">
                             <option>ALL</option>
                         </select>
-                        <span class="orange-button" id="privilege-table-searchButton">Add</span>
+                        <span class="orange-button" id="privilege-table-addButton">Add</span>
                     </div>
                     <div class="admin-data-container" id="privilege-tables">
                         <table class="adminTable-menu">
@@ -139,20 +136,13 @@
                                     <td>EMPLOYEE ID</td>
                                     <td>EMPLOYEE NAME</td>
                                     <td>DESIGNATION</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td></td>                                   
                                 </tr>
                             </table>
 
                             <div class="admin-table-container">
-                                <table class="flatTable table-row-unapprovedTable" >
-                                    <tr class="table-row-selectable">
-                                        <td>#2331212</td>  
-                                        <td>Rajesh</td>
-                                        <td>Developer</td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                <table class="flatTable table-row-adminTable" >
+
                                 </table>
                             </div>
                         </div>
@@ -163,20 +153,11 @@
                                     <td>EMPLOYEE NAME</td>
                                     <td>DESIGNATION</td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
                                 </tr>
                             </table>
                             <div class="admin-table-container">
-                                <table class="flatTable table-row-approvedTable">
-                                    <tr class="table-row-selectable">
-                                        <td>#2331212</td>
-                                        <td>Prasad</td>
-                                        <td>Tester</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                <table class="flatTable table-row-superAdminTable">
+
                                 </table>
                             </div>
                         </div>
@@ -187,20 +168,11 @@
                                     <td>EMPLOYEE NAME</td>
                                     <td>DESIGNATION</td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
                                 </tr>
                             </table>
                             <div class="admin-table-container">
-                                <table class="flatTable table-row-approvedTable">
-                                    <tr class="table-row-selectable">
-                                        <td>#2331212</td>
-                                        <td>Pramod</td>
-                                        <td>Feb 21,2013</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                <table class="flatTable table-row-nonNIOTable">
+
                                 </table>
                             </div>
                         </div>
@@ -208,7 +180,6 @@
                 </div>
             </div>
         </div><!--END OF CONTENTS-->
-
         <script src="js/jquery-1.10.2.js"></script>
         <script src="js/jquery-ui-1.10.4.js"></script>
         <script src="js/jquery-radiobutton-2.0.js"></script>

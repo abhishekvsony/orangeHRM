@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+    var applyDescription="";
     $("#nio-cal-checkbox").attr('disabled', true).prop('checked', false);  //setting the global checkbox disabled and unchecked
     var aspectRatio;
     aspectRatio = ($(document).width() * 0.73) / ($(document).height() * 0.792);
@@ -53,7 +53,7 @@ $(document).ready(function() {
                 else if(data[i]['status']==-1)
                     createEvent(data[i]['startTime'], data[i]['endTime'], data[i]['date'], 'NIO', NIO_APPLIED_REJECTED);
                 else
-                    if(data[i]['status']==0)
+                if(data[i]['status']==0)
                     createEvent(data[i]['startTime'], data[i]['endTime'], data[i]['date'], 'NIO', NIO_APPLIED_PENDING);
             }       
             ++i;
@@ -466,28 +466,32 @@ $(document).ready(function() {
             {
                 text: "Apply",
                 click: function() {
+                    
                     var nioType = 1;
                     $.ajax({
                         url: 'ajax/addNIO.php',
                         type: 'post',
                         data: {
                             data: dateObject,
-                            nioType: nioType
+                            nioType: nioType,
+                            description:applyDescription
                         },
                         success: function(data) {
+                            window.location="index.php";
                             console.log('okay good');
                             document.location = 'applyNIO.php';
                         }
                     });
 
                 //redirect the page to applyNIO.php after the mail has been sent
-                        
+                  
                 }
 
             },
             {
                 text: "Cancel",
                 click: function() {
+                    $(this).dialog("close");
                 }
 
             }
@@ -541,6 +545,7 @@ $(document).ready(function() {
     //------------------------This pops the description field--------
 
     $("#nio-cal-applyButton").click(function() {
+        if(dateObject.length>0){
         $("#popup-nio-description").dialog({
             position: {
                 my: "center",
@@ -556,6 +561,9 @@ $(document).ready(function() {
             {
                 text: "Proceed",
                 click: function() {
+                    applyDescription=tinyMCE.get('descriptionText').getContent();
+                    console.log(tinyMCE.get('descriptionText').getContent());
+                    $(this).dialog("close");
                     applyForNIO();
                 }
 
@@ -563,14 +571,26 @@ $(document).ready(function() {
             {
                 text: "Cancel",
                 click: function() {
-
+                    applyDescription=tinyMCE.get('descriptionText').getContent();
+                    $(this).dialog("close");
                 }
-
             }
             ]
         });
+         
+        tinyMCE.init({
+            mode : "specific_textareas",
+            editor_selector : "descriptionText",
+            height:"300px",
+            width:"100%",
+            readonly : false,
+            modal: true
+        });
+        tinyMCE.get('descriptionText').setContent(applyDescription);
+        }
     });
 
+   
     //---------------------Press on cancel button one goes to history page----
 
     $('#nio-cal-cancelButton').click(function() {
@@ -747,8 +767,7 @@ $(document).ready(function() {
                         $("#niohistory-popup").append("<table style='width: 100%'>"+
                             "<tr><td style='text-align: left'><b>Message: </b></td></tr></table>"); 
                         $("#popUp-noStatus").append("<textarea rows='4' style='resize:none;width: 95%; padding: 3px; margin: 10px 2.5% 10px 2%'>"+description+"</textarea>");
-                             
-                             
+                                
                         $("#niohistory-popup").append("<table style='width: 100%'>"+
                             "<tr><td style='text-align: left'><b>Login Details: </b></td></tr></table>"); 
                         $("#niohistory-popup").append('<table class="flatTable-heading template-lightBack">'+

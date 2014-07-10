@@ -12,8 +12,20 @@ if (isset($_GET['ACT']) && $_GET['ACT'] == 'logout') {
     exit();
 }
 $empID = $_SESSION['empID'];
-$empID = intval($empID);
+$SUPERVISOR = false;
 include 'ajax/getLoginDetails.php';
+
+if ($_SESSION['isAdmin'] != 'Yes') {
+    if ($NIO_STAT == false)
+        header("Location: requestForNIO.php");
+    else {
+        if ($_SESSION['isSupervisor'])
+            $SUPERVISOR = true;
+    }
+} else {
+    $ADMIN_STAT = true;
+    $SUPERVISOR = true;
+}
 ?>
 
 <div class="template-wrapper template-top template-lightBack">
@@ -27,9 +39,30 @@ include 'ajax/getLoginDetails.php';
                 <ul>
                     <a href="applyNIO.php"> <li class="template-navList">Apply For NIO </li></a>
                     <a href="index.php"> <li class="template-navList">NIO History</li> </a>
-                    <a href="summary.php"> <li class="template-navList">Work Summary</li></a>
-                    <a href="supervise.php"> <li class="template-navList">Supervise</li></a>
-                    <a href="admin.php" class="last"> <li class="template-navList">Admin</li></a>
+                    <?php
+                    if ($SUPERVISOR)
+                        echo " <a href='summary.php'> <li class='template-navList'>Work Summary</li></a>";
+                    else
+                        echo "<a href='summary.php' class='last'> <li class='template-navList'>Work Summary</li></a>";
+                    ?>
+
+
+                    <?php
+                    if ($ADMIN_STAT == false && $SUPER_ADMIN_STAT == false && $SUPERVISOR == true)
+                        echo " <a href='supervise.php' class='last'> <li class='template-navList'>Supervise</li></a>";
+                    ?>
+
+
+                    <?php
+                    if ($ADMIN_STAT == true || $SUPER_ADMIN_STAT == true)
+                        echo " <a href='supervise.php'> <li class='template-navList'>Supervise</li></a>";
+                    ?>
+
+
+                    <?php
+                    if ($ADMIN_STAT == true || $SUPER_ADMIN_STAT == true)
+                        echo " <a href='admin.php' class='last'> <li class='template-navList'>Admin</li></a>";
+                    ?>
                 </ul>
             </div>
         </div>

@@ -6,8 +6,6 @@
 
 include 'dbConnection.php';
 
-$empStatus='EST000';
-
 $employeeData=array();
 $designationData=array();
 $nio=array();
@@ -18,7 +16,8 @@ $result=  mysqli_query($hrm_conn, $query);
 while($row=  mysqli_fetch_array($result)){
     $name=$row['emp_firstname']." ".$row['emp_lastname'];
     $empID=$row['emp_number'];
-    $employeeData[]=array('label'=>$name,'value'=>$empID);
+    $jobTitle=$row['job_title_code'];
+    $employeeData[]=array('label'=>$name,'value'=>$empID,'jobTitleCode'=>$jobTitle);
 }
 
 $query="SELECT * FROM hs_hr_job_title";
@@ -59,5 +58,7 @@ $jsonData=array();
 $jsonData['empName']=$employeeData;
 $jsonData['designations']=$designationData;
 $jsonData['nio']=$nio;
+
 echo json_encode($jsonData);
+
 ?>
