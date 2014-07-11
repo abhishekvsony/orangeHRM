@@ -13,7 +13,7 @@ $empID=$row['emp_number'];
 
 $data = $_POST['data'];
 $description = "Forgot ID card";
-$nioType = 1;
+$nioType = $_POST['nioType'];
 $nioStatus = 0;
 $appDate = date('Y-m-d H:i:s');
 $duration = 0;

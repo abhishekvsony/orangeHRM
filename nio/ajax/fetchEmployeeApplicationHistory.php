@@ -1,5 +1,7 @@
 <?php
 
+//This has all the details of NIOs applied by the employee in the past.
+
 /*
   Structure of the Json to passback
  * date               

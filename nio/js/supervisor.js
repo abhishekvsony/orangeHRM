@@ -9,9 +9,38 @@ $(document).ready(function() {
     var textToPass;         // used in chart
     var seriesToPass;       // used in chart
     var dataToPass;         // used in chart
-    
+    var subs=[];
+    var superAdmin=false;
     var table= [1,1,1];  //table[0] -> noStatusTableRecord entry  table[1] -> unapprovedTableRecord entry table[2] -> approvedTableRecord entry 
     //--------------------- Template Work----------------------------------   
+    
+    function getSupervisorDetails(callBackGetSupervisorDetails){
+        // AJAX Data Loading Logic
+        $.ajax({
+            type: "POST",
+            url: "ajax/getSupervisorDetails.php",
+            dataType: 'json',
+            data: {
+                tableNumber : 2,
+                record : table[1]
+            },
+            success : callBackGetSupervisorDetails
+        });
+    }
+ 
+    function callBackGetSupervisorDetails(data){
+       
+        superAdmin=data['status']['superAdmin'];
+        if(superAdmin==1)
+            superAdmin=true;
+        else
+            superAdmin=false;
+        console.log(superAdmin);
+        subs=data['subs'];
+        console.log(subs);
+    }
+    
+    getSupervisorDetails(callBackGetSupervisorDetails);
     
     $("#table-unapproved").addClass('template-darkBack');
     $("#table-approved").addClass('template-darkBack');
@@ -94,7 +123,7 @@ $(document).ready(function() {
                 page: leaveChartPageNumber
             },
             success: function(data){
-                console.log(data);   
+                
                 textToPass="Total number of leaves";
                 seriesToPass=[{
                     name: 'Leaves left',
@@ -106,7 +135,7 @@ $(document).ready(function() {
                 ];
                 dataToPass=data[0];
                 
-                console.log(data[0].length);
+                
                 
                 if(data[0].length>1)
                     createGraphLeave(textToPass,seriesToPass,dataToPass);
@@ -128,15 +157,15 @@ $(document).ready(function() {
     $(".admin-table-container").mCustomScrollbar({
         theme:"dark",
         callbacks:{
-            onTotalScrollOffset: 400,
+            onTotalScrollOffset: 800,
             onTotalScroll: function(){
                 if($(this).parent().attr('tableNumber')==1)
-                    populateNoStatusTable();
+                    populateNoStatusTable(callBackNoStatusTable);
                 if($(this).parent().attr('tableNumber')==2){
-                    populateUnapprovedTable();
+                    populateUnapprovedTable(callBackUnapprovedTable);
                 }
                 if($(this).parent().attr('tableNumber')==3){
-                    populateApprovedTable();
+                    populateApprovedTable(callBackApprovedTable);
                 }
             }
         }
@@ -159,7 +188,7 @@ $(document).ready(function() {
     function callBackUnapprovedTable(data){
         var i=0;
         while(data[i]){
-            $(".table-row-unapprovedTable").append(" <tr class=\"table-row-selectable\" tableNumber=2 nio_id="+data[i]['nioID']+"><td>"+
+            $(".table-row-unapprovedTable").append(" <tr class=\"table-row-selectable\" tableNumber=2 nio_id="+data[i]['nioID']+" empID="+data[i]['empID']+"><td>"+
                 data[i]['empID']+"</td><td>"+data[i]['empName']+"</td><td>"+
                 data[i]['reason']+
                 "</td><td>"+data[i]['startDate']+"</td> <td>"+data[i]['endDate']+"</td> <td>"
@@ -190,7 +219,7 @@ $(document).ready(function() {
     function callBackApprovedTable(data){
         var i=0;
         while(data[i]){
-            $(".table-row-approvedTable").append(" <tr class=\"table-row-selectable\" tableNumber=3 nio_id="+data[i]['nioID']+"><td>"+
+            $(".table-row-approvedTable").append(" <tr class=\"table-row-selectable\" tableNumber=3 nio_id="+data[i]['nioID']+" empID="+data[i]['empID']+"><td>"+
                 data[i]['empID']+"</td><td>"+data[i]['empName']+"</td>"+
                 "<td>"+data[i]['reason']+
                 "</td><td>"+data[i]['startDate']+"</td> <td>"+data[i]['endDate']+"</td> <td>"
@@ -223,8 +252,8 @@ $(document).ready(function() {
     function callBackNoStatusTable(data){
         var i=0;
         while(data[i]){
-            $(".table-row-noStatusTable").append(" <tr class=\"table-row-selectable\" tableNumber=1 attID="+data[i]['attID']+">"+
-                "<td>"+data[i]['attID']+"</td><td>"+data[i]['empID']+"</td><td>"+data[i]['empName']+"</td><td>"+
+            $(".table-row-noStatusTable").append(" <tr class=\"table-row-selectable\" tableNumber=1 attID="+data[i]['attID']+" empID="+data[i]['empID']+">"+
+                "<td>"+data[i]['empID']+"</td><td>"+data[i]['empName']+"</td><td>"+
                 data[i]['date']+"</td><td>"+data[i]['duration']+
                 "</td></tr>");  
             ++i;
@@ -311,14 +340,13 @@ $(document).ready(function() {
 
     $("body").delegate(".table-row-selectable","click",function() {
         var nio_id;
-        var table = $(this).closest('table');
         var element=$(this);
-        console.log(table.attr('tableNumber'));
         tableNumber = parseInt($(this).attr('tableNumber'), 10);
         switch (tableNumber) {
             case 1:
                 var caseID=$(this).attr('attID');
-                
+                var empID=$(this).attr('empID');
+                   empID=parseInt(empID);
                 $("#popUp-noStatus").dialog({
                     position:{
                         my: "center", 
@@ -404,7 +432,9 @@ $(document).ready(function() {
                 break;
             case 2:
                 nio_id = $(this).attr('nio_id');
-                console.log(nio_id);
+                var empID=$(this).attr('empID');
+                   empID=parseInt(empID);
+                console.log(empID);
                 $("#popUp-unapproved").dialog({
                     position:{
                         my: "center", 
@@ -422,59 +452,69 @@ $(document).ready(function() {
                     {
                         text: "Accept",
                         click: function() {
-                            $.ajax({
-                                type: "POST",
-                                url: "ajax/changeNioStatus.php",
-                                dataType: 'json',
-                                data: {
-                                    nioID: nio_id,
-                                    status: 1
-                                },
-                                success : function(data){
-                                    console.log(data);
-                                    alert("Accepted");
+                          empID=parseInt(empID);
+                            console.log($.inArray(empID,subs));
+                            console.log(subs);
+                            if(superAdmin||$.inArray(empID,subs)>=0){
+                                $.ajax({
+                                    type: "POST",
+                                    url: "ajax/changeNioStatus.php",
+                                    dataType: 'json',
+                                    data: {
+                                        nioID: nio_id,
+                                        status: 1
+                                    },
+                                    success : function(data){
+                                        console.log(data);
+                                        alert("Accepted");
                                     
+                                    }
+                                });
+                                element.css({
+                                    "margin":"0px",
+                                    "padding":"0px"
+                                });
+                                element.remove();
+                                if(chartNumber==2){
+                                    nioChartPageNumber=1;
+                                    nioChart();
                                 }
-                            });
-                            element.css({
-                                "margin":"0px",
-                                "padding":"0px"
-                            });
-                            element.remove();
-                            if(chartNumber==2){
-                                nioChartPageNumber=1;
-                                nioChart();
-                            }
-                            $( this ).dialog( "close" );
+                                $( this ).dialog( "close" );
+                            } else
+                                alert("Sorry you are not Super Admin");
                         },
                         'class':"button-green"
                     },
                     {
                         text: "Reject",
                         click: function() {
-                            $.ajax({
-                                type: "POST",
-                                url: "ajax/changeNioStatus.php",
-                                dataType: 'json',
-                                data: {
-                                    nioID: nio_id,
-                                    status: -1
-                                },
-                                success : function(data){
-                                    console.log(data);
-                                    alert("Rejected"); 
+                               empID=parseInt(empID);
+                            if(superAdmin||$.inArray(empID,subs)>=0){
+                                $.ajax({
+                                    type: "POST",
+                                    url: "ajax/changeNioStatus.php",
+                                    dataType: 'json',
+                                    data: {
+                                        nioID: nio_id,
+                                        status: -1
+                                    },
+                                    success : function(data){
+                                        console.log(data);
+                                        alert("Rejected"); 
+                                    }
+                                });  
+                                element.css({
+                                    "margin":"0px",
+                                    "padding":"0px"
+                                });
+                                element.remove();
+                                if(chartNumber==2){
+                                    nioChartPageNumber=1;
+                                    nioChart();
                                 }
-                            });  
-                            element.css({
-                                "margin":"0px",
-                                "padding":"0px"
-                            });
-                            element.remove();
-                            if(chartNumber==2){
-                                nioChartPageNumber=1;
-                                nioChart();
-                            }
-                            $( this ).dialog( "close" );
+                                $( this ).dialog( "close" );
+                            } else
+                                alert("Sorry you are not Super Admin");
                         },
                         'class':"button-red"
                     }
@@ -530,6 +570,8 @@ $(document).ready(function() {
                 break;
             case 3:
                 nio_id = $(this).attr('nio_id');
+                empID=$(this).attr('empID');
+                   empID=parseInt(empID);
                 console.log(nio_id);
                 $("#popUp-approved").dialog({
                     position:{
@@ -548,58 +590,66 @@ $(document).ready(function() {
                     {
                         text: "Pending",
                         click: function() {
-                            $.ajax({
-                                type: "POST",
-                                url: "ajax/changeNioStatus.php",
-                                dataType: 'json',
-                                data: {
-                                    nioID: nio_id,
-                                    status: 0
-                                },
-                                success : function(data){
-                                    console.log(data);
-                                    alert("Pending");
+                            if(superAdmin||$.inArray(empID,subs)>=0){
+                                $.ajax({
+                                    type: "POST",
+                                    url: "ajax/changeNioStatus.php",
+                                    dataType: 'json',
+                                    data: {
+                                        nioID: nio_id,
+                                        status: 0
+                                    },
+                                    success : function(data){
+                                        console.log(data);
+                                        alert("Pending");
+                                    }
+                                });  
+                                element.css({
+                                    "margin":"0px",
+                                    "padding":"0px"
+                                });
+                                element.remove();
+                                if(chartNumber==2){
+                                    nioChartPageNumber=1;
+                                    nioChart();
                                 }
-                            });  
-                            element.css({
-                                "margin":"0px",
-                                "padding":"0px"
-                            });
-                            element.remove();
-                            if(chartNumber==2){
-                                nioChartPageNumber=1;
-                                nioChart();
-                            }
-                            $( this ).dialog( "close" );
+                                $( this ).dialog( "close" );
+                            } else
+                                alert("Sorry you are not Super Admin");
                         },
                         'class':"button-green"
                     },
                     {
                         text: "Reject",
                         click: function() {
-                            $.ajax({
-                                type: "POST",
-                                url: "ajax/changeNioStatus.php",
-                                dataType: 'json',
-                                data: {
-                                    nioID: nio_id,
-                                    status: -1
-                                },
-                                success : function(data){
-                                    console.log(data);
-                                    alert("Rejected");
+                               empID=parseInt(empID);
+                            if(superAdmin||$.inArray(empID,subs)>=0){
+                                $.ajax({
+                                    type: "POST",
+                                    url: "ajax/changeNioStatus.php",
+                                    dataType: 'json',
+                                    data: {
+                                        nioID: nio_id,
+                                        status: -1
+                                    },
+                                    success : function(data){
+                                        console.log(data);
+                                        alert("Rejected");
+                                    }
+                                }); 
+                                element.css({
+                                    "margin":"0px",
+                                    "padding":"0px"
+                                });
+                                element.remove();
+                                if(chartNumber==2){
+                                    nioChartPageNumber=1;
+                                    nioChart();
                                 }
-                            }); 
-                            element.css({
-                                "margin":"0px",
-                                "padding":"0px"
-                            });
-                            element.remove();
-                            if(chartNumber==2){
-                                nioChartPageNumber=1;
-                                nioChart();
+                                $( this ).dialog( "close" );
                             }
-                            $( this ).dialog( "close" );
+                            else
+                                alert("Sorry you are not Super Admin");
                         },
                         'class':"button-red"
                     }
@@ -663,25 +713,14 @@ $(document).ready(function() {
         content: "Close Graph"
     });
     
-    $(".searchBox input" ).tooltip({
-        content: "Employee Name"
-    });
-    
-    $(".searchBox select" ).tooltip({
-        content: "Select Employee Designation"
-    });
-    
-    
-    $(".admin-graph-controlShow").hide();
+    $(".admin-graph-box").slideToggle(3000);
    
     $("#closeGraph img").click(function() {
         $(".admin-graph-box").slideToggle(1000);
-        $(".admin-graph-controlShow").slideToggle(500);
     });
     
     $(".admin-graph-controlShow").click(function() {
         $(".admin-graph-box").slideToggle(1000);
-        $(".admin-graph-controlShow").slideToggle(500);
     });
      
     //--------------------Graph Pagination-----------------------
@@ -777,6 +816,10 @@ $(document).ready(function() {
         table[1]=1;      //reset to fetch the first record.
              
         populateUnapprovedTable(callBackUnapprovedTable);
+    });
+    
+    $("#leaveCount").click(function(){
+        window.location=('../index.php?menu_no_top=leave');
     });
  
  

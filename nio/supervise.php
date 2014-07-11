@@ -40,7 +40,7 @@
                 </li>
             </ul>
             <div class="admin-container" id="admin-main-menu">
-                <div class="admin-graph-controlShow">CHART</div>
+                <div class="admin-graph-controlShow">Leave and NIO Charts</div>
                 <div class="admin-graph-box">
 
                     <div class="admin-graph-controller template-darkBack" id="adminGraphController">
@@ -71,7 +71,6 @@
                     <div class="admin-table-div" id="table-noStatusTable" tableNumber="1">
                         <table class="flatTable-heading template-lightBack"  tableNumber=1>
                             <tr class="headingTr template-lightBack">
-                                <td>CASE ID</td>
                                 <td>EMPLOYEE ID</td>
                                 <td>EMPLOYEE NAME</td>
                                 <td>DATE</td>

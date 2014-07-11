@@ -30,3 +30,5 @@ Wed, 09 Jul 2014 11:32:50 +0200 :
 Undefined index: recordsCount in C:\xampp\htdocs\OrangeHRM\templates\leave\leaveRequestList.php on line 28
 Wed, 09 Jul 2014 11:38:05 +0200 : 
 Undefined index: recordsCount in C:\xampp\htdocs\OrangeHRM\templates\leave\leaveRequestList.php on line 28
+Fri, 11 Jul 2014 08:58:12 +0200 : 
+Missing argument 2 for LeaveRequests::retriveLeaveRequestsSupervisor(), called in C:\xampp\htdocs\OrangeHRM\lib\controllers\LeaveController.php on line 777 and defined in C:\xampp\htdocs\OrangeHRM\lib\models\leave\LeaveRequests.php on line 197

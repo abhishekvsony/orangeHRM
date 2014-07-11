@@ -716,7 +716,7 @@ if ($_SESSION['isAdmin']!='Yes') {
 }
 
 /*NIO MENU*/
-$menuItem = new MenuItem("leave", "NIO", "./nio/index.php");
+$menuItem = new MenuItem("leave", "NIO", "./nio/index.php",'_blank');
 $menuItem->setCurrent($_GET['menu_no_top']=="leave");
 
 $menu[] = $menuItem;

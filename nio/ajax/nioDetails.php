@@ -1,4 +1,6 @@
 <?php
+//Particular employee getting his details of applied NIOs
+
 
 $nioID=$_POST['nioID'];
 

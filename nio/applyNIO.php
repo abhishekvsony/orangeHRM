@@ -22,14 +22,16 @@
         <div class="nio-cal-contents">
             <div id="nio-calendar"></div>
             <div class="nio-selected-contents">
-                <div class="nio-cal-info"></div>
+                <div class="nio-cal-info">
+                    <ul>
+                        <li></li><li></li>
+                        <li></li><li></li>
+                    </ul>
+                </div>
                 <div class="nio-apply-form">
                     <div class="nio-apply-general">
                         <select id="nio-apply-reason">
-                            <option>Forgot ID</option>
-                            <option>Business Trip</option>
-                            <option>Work from home</option>
-                            <option>Meeting with Client</option>
+                            <option value=-1>SELECT REASON</option>
                         </select>
                     </div>
                     <table class="nio-cal-control">    

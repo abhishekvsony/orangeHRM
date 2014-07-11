@@ -21,7 +21,40 @@ $(document).ready(function() {
     var LEAVE_APPLIED = 'red';           //Leave applied
 
     //-------------------End Of Colors-----------------
+    
+    var ALLOW_HOLIDAYS=false;       //SHOULD HOLIDAYS BE ALLOWED IN NIO
+    
+    var WEEKENDS=[1,7];        //Stores the weekend day. Generally sat, sun are weekends but 
+    //you can just have sunday as weekend for a company
+    // Sun : 1, Mon: 2, Tue: 3, Wed: 4,Thu: 5, Fri: 6, Sat:7                     
+    var HOLIDAYS=[];        //WHAT ARE THE DATES OF HOLIDAYS
+    
+    var NIO_TYPES=[];
     //-------------------Fetch Employee History of NIO----------------------
+    
+   function getGeneralDetailsCallback(data){
+        
+        NIO_TYPES=data['nioTypes'];
+        console.log(NIO_TYPES);
+        $.each(NIO_TYPES,function(j){
+           $('<option>').val(NIO_TYPES[j]['nioTypeID']).text(NIO_TYPES[j]['nioTypeName']).appendTo('#nio-apply-reason');
+        });
+        $('<option>').val(-2).text('Other').appendTo('#nio-apply-reason');
+    }
+    
+    function getGeneralDetails(getGeneralDetailsCallback){
+        $.ajax({
+            dataType: 'json',
+            url: 'ajax/applyNIOGenDetails.php',
+            type: 'post',
+            data: {
+                               
+            },
+            success: getGeneralDetailsCallback
+        });
+    }
+    
+    getGeneralDetails(getGeneralDetailsCallback);
     
     function fetchEmployeeHistory(fetchHistoryCallBack){
         $.ajax({
@@ -62,8 +95,53 @@ $(document).ready(function() {
     
     fetchEmployeeHistory(fetchHistoryCallBack);
 
-    //------------End of Employee History----------------
-    //
+    //------------VALIDATE HOLIDAYS----------------
+    
+    function validateHoliday(date){
+        console.log(date);
+        if(ALLOW_HOLIDAYS)
+            return true;
+        var  tempDate=date;
+        var day= tempDate.format('ddd');
+        switch(day){
+            case 'Sun':
+                day=1;
+                break;
+            case 'Mon':
+                day=2;
+                break;
+            case 'Tue':
+                day=3;
+                break;
+            case 'Wed':
+                day=4;
+                break;
+            case 'Thur':
+                day=5;
+                break;
+            case 'Fri':
+                day=6;
+                break;
+            case 'Sat':
+                day=7;
+                break;
+        }
+        
+        var flag=1;
+        console.log(day);
+        $.each(WEEKENDS,function(j){
+            if(WEEKENDS[j]==day){
+                flag=0;
+                return false;
+            }
+        });
+    
+        if(flag==0)
+            return false;
+    
+        return true;
+    }
+    
     //-------------------DROP DOWN CREATION---------------------------------
     function minToTimeFormat(time) {
         var min = time % 60;
@@ -112,17 +190,19 @@ $(document).ready(function() {
             dropDown_2 = dropDown_2 + "</select>";
 
             var temp;       //to check the entry of a date
-            while (i < endDate) {       //Making a list of all the dates selected
+            while (i < endDate ) {       //Making a list of all the dates selected
                 temp = i;
-                dateObject.push({
-                    'id': index,
-                    'date': temp.unix() * 1000,
-                    'startTime': '09:00',
-                    'endTime': '17:00',
-                    'status': 0
-                });
-                index++;
-
+                if(validateHoliday(i)){
+                    dateObject.push({
+                        'id': index,
+                        'date': temp.unix() * 1000,
+                        'startTime': '09:00',
+                        'endTime': '17:00',
+                        'status': 0
+                    });
+                    index++;
+                }
+              
                 i.add('days', 1);
             }
             $('.nio-apply-dates').empty();
@@ -182,8 +262,6 @@ $(document).ready(function() {
 
         if (startTime > endTime)           //Simple validation check startTime endTIme
             return false;
-
-        console.log(endTime - startTime);
         if ((endTime - startTime < 60 * 60)) {
             return false;
         }
@@ -196,9 +274,9 @@ $(document).ready(function() {
          */
         var flag = 1;            /// flag=1          Means its a validate entry
         var temp;
+        var validatedStartTime;
+        var validatedEndTime;
         $.each(dateObject, function(j) {  //function to remove object from the array
-            console.log(date);
-            console.log(moment(parseInt(dateObject[j].date)).format("YYYY-MM-DD"));
             temp = dateObject[j].date;
             if (moment(parseInt(temp)).format("YYYY-MM-DD") === date) {
                 if (dateObject[j].status == 1) {  //Only check with cases that are added as events else not required
@@ -467,7 +545,7 @@ $(document).ready(function() {
                 text: "Apply",
                 click: function() {
                     
-                    var nioType = 1;
+                    var nioType = $("#nio-apply-reason").val();
                     $.ajax({
                         url: 'ajax/addNIO.php',
                         type: 'post',
@@ -545,48 +623,66 @@ $(document).ready(function() {
     //------------------------This pops the description field--------
 
     $("#nio-cal-applyButton").click(function() {
-        if(dateObject.length>0){
-        $("#popup-nio-description").dialog({
-            position: {
-                my: "center",
-                at: "center",
-                of: window
-            },
-            modal: true,
-            draggable: false,
-            title: "Description NIO..",
-            width: 700,
-            height: 550,
-            buttons: [
-            {
-                text: "Proceed",
-                click: function() {
-                    applyDescription=tinyMCE.get('descriptionText').getContent();
-                    console.log(tinyMCE.get('descriptionText').getContent());
-                    $(this).dialog("close");
-                    applyForNIO();
-                }
+        var flag=1;
+        $.each(dateObject,function(j){
+            if(dateObject[j].status==0){
+                flag=0;
+                return false;
+            } 
+        });
+        var nioType = $("#nio-apply-reason").val();
+        
+        if(nioType==-1)             //NOT SELECTED
+            flag=0;
+        
+        if(dateObject.length==0)
+            flag=0;
+        
+        if(flag){
+            $("#popup-nio-description").dialog({
+                position: {
+                    my: "center",
+                    at: "center",
+                    of: window
+                },
+                modal: true,
+                draggable: false,
+                title: "Description NIO..",
+                width: 700,
+                height: 550,
+                buttons: [
+                {
+                    text: "Proceed",
+                    click: function() {
+                        applyDescription=tinyMCE.get('descriptionText').getContent();
+                        console.log(tinyMCE.get('descriptionText').getContent());
+                        $(this).dialog("close");
+                        applyForNIO();
+                    }
 
-            },
-            {
-                text: "Cancel",
-                click: function() {
-                    applyDescription=tinyMCE.get('descriptionText').getContent();
-                    $(this).dialog("close");
+                },
+                {
+                    text: "Cancel",
+                    click: function() {
+                        applyDescription=tinyMCE.get('descriptionText').getContent();
+                        $(this).dialog("close");
+                    }
                 }
-            }
-            ]
-        });
+                ]
+            });
          
-        tinyMCE.init({
-            mode : "specific_textareas",
-            editor_selector : "descriptionText",
-            height:"300px",
-            width:"100%",
-            readonly : false,
-            modal: true
-        });
-        tinyMCE.get('descriptionText').setContent(applyDescription);
+            tinyMCE.init({
+                mode : "specific_textareas",
+                editor_selector : "descriptionText",
+                height:"300px",
+                width:"100%",
+                readonly : false,
+                modal: true
+            });
+            tinyMCE.get('descriptionText').setContent(applyDescription);
+        }
+        else{
+            
         }
     });
 
