@@ -1,6 +1,8 @@
 <?php
 
-include("dbConnection.php");
+session_start();
+
+include_once 'getLoginDetails.php';
 $dateselected = $_POST['dateselected'];
     
 //$monthselected = $_POST['monthselected'];
@@ -29,7 +31,7 @@ $i = 0;
 for ($i = 0; $i < $number_of_days_in_week; $i++) {
 
     $dateincremented = date('Y-m-d', $dateselected);
-    $query = " SELECT * FROM hs_hr_nio_attendance WHERE emp_id=1 AND date='$dateincremented'";
+    $query = " SELECT * FROM hs_hr_nio_attendance WHERE emp_id='$LOGINID' AND date='$dateincremented'";
     $result = mysqli_query($nio_conn, $query);
     $row = mysqli_fetch_array($result);
     $work_inday[] = $row['duration'] / 60;
