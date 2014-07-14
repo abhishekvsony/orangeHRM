@@ -393,7 +393,7 @@ $(document).ready(function() {
 
     var curr_date = d.getDate();
 
-    var curr_month = d.getMonth();
+    var curr_month = d.getMonth()+1;
 
     var curr_year = d.getFullYear();
 
