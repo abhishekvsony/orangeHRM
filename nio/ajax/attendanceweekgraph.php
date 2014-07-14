@@ -1,6 +1,8 @@
 <?php
 
-include("dbConnection.php");
+session_start();
+
+include_once 'getLoginDetails.php';
 $monthselected = $_POST['monthselected'];
 $monthstr = strtotime($monthselected);
 $monthname=date('m',$monthstr);
@@ -34,7 +36,7 @@ $nextweek = date('Y-m-d', $nextweekstart);
 for ($i = 0; $i < 4; $i++) {
     //to get next 7 days
     // $monthincremented = date('Y-m-d', $monthselected);
-    $query = "SELECT SUM(duration) AS duration FROM hs_hr_nio_attendance WHERE emp_id=1 AND date BETWEEN '$monthdate' AND  '$nextweek'";
+    $query = "SELECT SUM(duration) AS duration FROM hs_hr_nio_attendance WHERE emp_id='$LOGINID' AND date BETWEEN '$monthdate' AND  '$nextweek'";
     // $query = " SELECT * FROM hs_hr_nio_attendance WHERE emp_id=1 AND date='$weekincremented'";
     $result = mysqli_query($nio_conn, $query);
     $row = mysqli_fetch_array($result);
