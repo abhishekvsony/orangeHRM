@@ -36,7 +36,7 @@
 
 
         <div class="datepicker" id="datechoose">
-            Date1: <input type="text" name="datepicker" id="datepicker"  />
+            Date: <input type="text" name="datepicker" id="datepicker"  />
 
         </div>
         <script>
@@ -57,7 +57,7 @@
 
 
         <div class="datepicker" id="monthchoose">
-            Date2: <input type="text" id="monthpicker">
+            Date: <input type="text" id="monthpicker">
         </div>
         <script>
             $(function() {
@@ -75,7 +75,7 @@
 
 
         <div class="datepicker" id="yearchoose">
-            Date3: <input type="text" id="yearpicker">
+            Date: <input type="text" id="yearpicker">
         </div>
         <script>
             $(function() {
